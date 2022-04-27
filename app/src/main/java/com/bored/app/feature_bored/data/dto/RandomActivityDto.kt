@@ -1,5 +1,6 @@
 package com.bored.app.feature_bored.data.dto
 
+import com.bored.app.feature_bored.domain.model.RandomActivity
 import com.google.gson.annotations.SerializedName
 
 data class RandomActivityDto(
@@ -24,4 +25,10 @@ data class RandomActivityDto(
 
 	@field:SerializedName("participants")
 	val participants: Int
-)
+) {
+	fun toRandomActivity() = RandomActivity(
+		activity = activity,
+		type = type,
+		participants = participants
+	)
+}

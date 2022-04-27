@@ -7,6 +7,7 @@ import com.bored.app.feature_bored.data.dto.RandomActivityDto
 import com.bored.app.feature_bored.data.remote.BoredApi
 import com.bored.app.feature_bored.domain.repository.BoredRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.onEach
 
 class BoredRepositoryImpl(
     private val service: BoredApi,
