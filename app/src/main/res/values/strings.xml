@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">BoredApp</string>
+
+    <!--  General message  -->
+    <string name="general_message_unknown_error">Unknown error has occurred</string>
+    <string name="general_message_server_maintenance">Server maintenance</string>
+    <string name="general_message_server_error">Server error</string>
+    <string name="general_message_cannot_retrieve_data">Cannot retrieve data</string>
+    <string name="general_message_timeout_error">Timeout</string>
+    <string name="general_message_network_error">Please check your internet</string>
 </resources>
