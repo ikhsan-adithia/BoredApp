@@ -1,6 +1,6 @@
 package com.bored.app.feature_bored.data.remote
 
-import com.bored.app.feature_bored.domain.model.RandomActivityDto
+import com.bored.app.feature_bored.data.dto.RandomActivityDto
 import retrofit2.http.GET
 
 interface BoredApi {

@@ -1,4 +1,4 @@
-package com.bored.app.feature_bored.domain.model
+package com.bored.app.feature_bored.data.dto
 
 import com.google.gson.annotations.SerializedName
 
