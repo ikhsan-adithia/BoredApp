@@ -1,7 +1,7 @@
 package com.bored.app.feature_bored.presentation
 
-import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -22,7 +22,6 @@ import com.bored.app.core.presentation.utils.asString
 import com.bored.app.feature_bored.domain.model.RandomActivity
 import kotlinx.coroutines.flow.collectLatest
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun BoredScreen(viewModel: BoredViewModel = hiltViewModel()) {
     val scaffoldState = rememberScaffoldState()
@@ -31,10 +30,8 @@ fun BoredScreen(viewModel: BoredViewModel = hiltViewModel()) {
 
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collectLatest { event ->
-            Log.e("BoredScreen", event.toString())
             when (event) {
                 is UiEvent.ShowSnackbar -> {
-                    Log.e("BoredScreen", "UiEvent.ShowSnackbar ${event.uiText.asString(context)}")
                     scaffoldState.snackbarHostState.showSnackbar(event.uiText.asString(context), duration = SnackbarDuration.Short)
                 }
             }
@@ -43,16 +40,17 @@ fun BoredScreen(viewModel: BoredViewModel = hiltViewModel()) {
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        scaffoldState = scaffoldState,
+        scaffoldState = scaffoldState
     ) {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            onClick = {
-                viewModel.getRandomActivity()
-            }
-        ) {
+        Surface(modifier = Modifier.fillMaxSize()) {
             Column(
-                modifier = Modifier.padding(20.dp),
+                modifier = Modifier
+                    .clickable {
+                        if (!state.isLoading) {
+                            viewModel.getRandomActivity()
+                        }
+                    }
+                    .padding(20.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
@@ -71,16 +69,16 @@ fun BoredScreen(viewModel: BoredViewModel = hiltViewModel()) {
                     )
                 )
             }
-        }
 
-        if (state.isLoading) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(color = Color(0x33000000)),
-                contentAlignment = Alignment.Center
-            ) {
-                CircularProgressIndicator()
+            if (state.isLoading) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(color = Color(0x33000000)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator()
+                }
             }
         }
     }
