@@ -1,9 +1,11 @@
 package com.bored.app.di
 
+import com.bored.app.core.data.utils.GsonParser
 import com.bored.app.core.domain.utils.JsonParser
 import com.bored.app.feature_bored.data.remote.BoredApi
 import com.bored.app.feature_bored.data.repository.BoredRepositoryImpl
 import com.bored.app.feature_bored.domain.repository.BoredRepository
+import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,6 +26,10 @@ object BoredModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(BoredApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideJsonParser(): JsonParser = GsonParser(Gson())
 
     @Provides
     @Singleton
